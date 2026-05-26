@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+package-lock.json
+bun.lock
+
+# macOS
+.DS_Store
+
+# Editor swap files
+*.swp
+*.swo
+*~
+
+# Opencode local state (decision logs, etc.)
+.opencode/

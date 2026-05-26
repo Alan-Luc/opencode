@@ -1,0 +1,107 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "anthropic/claude-opus-4-6",
+  "shell": "/bin/zsh",
+  "autoupdate": "notify",
+  "lsp": true,
+  "instructions": [
+    "CLAUDE.md",
+    "AGENTS.md",
+    ".cursorrules",
+    ".cursor/rules/*.md",
+    ".cursor/rules/**/*.mdc",
+    ".cursor/*.md"
+  ],
+  "skills": {
+    "paths": [".claude/skills"]
+  },
+  "permission": "allow",
+  "default_agent": "tech-lead",
+
+  "plugin": ["./plugin/claude-agents-bridge.ts"],
+
+  "agent": {
+    "build": {
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "*": "allow",
+          "git push*": "ask",
+          "git commit*": "ask",
+          "git rebase*": "ask",
+          "git reset*": "ask",
+          "git merge*": "ask",
+          "git cherry-pick*": "ask",
+          "git checkout*": "ask",
+          "git switch*": "ask",
+          "git clean*": "ask",
+          "git revert*": "ask",
+          "git branch -d*": "ask",
+          "git branch -D*": "ask",
+          "git stash drop*": "ask",
+          "git stash clear*": "ask",
+          "git tag -d*": "ask",
+          "rm -rf /*": "deny",
+          "rm -rf ~*": "deny"
+        }
+      },
+      "prompt": "Run safe/read-only shell checks as separate commands. Avoid chaining with && or ; unless there is a real dependency. Never mix read-only and mutating commands in a single chain."
+    }
+  },
+
+  "mcp": {
+    "notion": {
+      "type": "remote",
+      "url": "https://mcp.notion.com/mcp"
+    },
+    "jira": {
+      "type": "remote",
+      "url": "https://mcp.atlassian.com/v1/sse"
+    },
+    "figma": {
+      "type": "remote",
+      "url": "https://mcp.figma.com/mcp"
+    },
+    "sentry": {
+      "type": "remote",
+      "url": "https://mcp.sentry.dev/mcp"
+    },
+    "codesearch": {
+      "type": "remote",
+      "url": "https://codesearch-internal.inf.replicant.ai/mcp"
+    },
+    "gitlab-community": {
+      "type": "local",
+      "command": ["npx", "-y", "@zereight/mcp-gitlab"],
+      "environment": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "${GITLAB_PERSONAL_ACCESS_TOKEN}",
+        "GITLAB_API_URL": "https://gitlab.com/api/v4/",
+        "GITLAB_READ_ONLY_MODE": "true",
+        "USE_GITLAB_WIKI": "false",
+        "USE_MILESTONE": "false",
+        "USE_PIPELINE": "false"
+      }
+    },
+    "gitlab": {
+      "type": "remote",
+      "url": "https://gitlab-mcp-internal.inf.replicant.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GITLAB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  },
+
+  "command": {
+    "code_review": {
+      "description": "Run a code review on the current changes",
+      "template": "Use a sub-task to provide a brief code review on the changes. Focus on correctness and simplicity.",
+      "subtask": true
+    },
+    "qa": {
+      "description": "Run a full QA pass via qa-lead on the current branch's changes",
+      "template": "Run a full QA pass on the current branch's changes. Identify the changed files via git diff against the base branch, pick the relevant specialist reviewers based on what changed, dispatch them in parallel, synthesize findings, and return a structured report.",
+      "agent": "qa/qa-lead",
+      "subtask": true
+    }
+  }
+}
