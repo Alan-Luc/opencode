@@ -18,6 +18,7 @@ const CLAUDE_AGENTS_DIR = ".claude/agents"
 const MODEL_ALIASES: Record<string, string> = {
   sonnet: "anthropic/claude-sonnet-4-5",
   opus: "anthropic/claude-opus-4-7",
+  mini: "openai/gpt-5.4-mini",
 }
 
 function mapModel(raw: string | undefined): string | undefined {

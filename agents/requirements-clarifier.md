@@ -1,7 +1,7 @@
 ---
 description: Use when a request is vague, missing acceptance criteria, or has unclear scope and edge cases. Transforms ambiguous task descriptions into structured requirements - user stories, acceptance criteria, edge cases, open questions. Read-only specialist; never writes code or edits files. Trigger keywords - "build me a", "add a feature for", undefined requirements, vague user-facing changes, missing scope, unclear acceptance.
 mode: subagent
-model: anthropic/claude-opus-4-7
+model: openai/gpt-5.4-mini
 permission:
   edit: deny
   bash: deny
@@ -45,6 +45,10 @@ Numbered list. Each question must be specific enough that a one-or-two-sentence 
 ### 6. Suggested Implementation Phases (only if non-trivial)
 
 Break the work into deliverable milestones. Identify the MVP slice vs. the full vision. Sequence dependencies explicitly.
+
+- Prefer the smallest coherent ownership slices.
+- Mark which slices are independent and can run in parallel.
+- Merge slices only when there is a real dependency or shared-output reason.
 
 ## Self-check before responding
 

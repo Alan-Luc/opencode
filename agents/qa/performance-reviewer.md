@@ -1,7 +1,8 @@
 ---
 description: Use to review performance concerns - algorithmic complexity, query patterns, memory, network, caching, frontend Core Web Vitals, bundle size. Read-only specialist that produces structured findings on performance only. Dispatched by qa/qa-lead. Trigger keywords - performance review, N+1, latency, memory leak, bundle size, Core Web Vitals, LCP, INP, CLS, slow queries, async, caching.
 mode: subagent
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.4-mini
+variant: high
 permission:
   edit: deny
   bash: deny

@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "anthropic/claude-opus-4-6",
+  "model": "openai/gpt-5.4-mini",
   "shell": "/bin/zsh",
   "autoupdate": "notify",
   "lsp": true,
@@ -13,13 +13,22 @@
     ".cursor/*.md"
   ],
   "skills": {
-    "paths": [".claude/skills"]
+    "paths": [
+      ".claude/skills"
+    ]
   },
   "permission": "allow",
   "default_agent": "tech-lead",
-
-  "plugin": ["./plugin/claude-agents-bridge.ts"],
-
+  "reference": {
+    "scratch": {
+      "path": ".opencode"
+    }
+  },
+  "plugin": [
+    "./plugin/claude-agents-bridge.ts",
+    "@dietrichgebert/ponytail",
+    "ponytail"
+  ],
   "agent": {
     "build": {
       "permission": {
@@ -48,23 +57,26 @@
       "prompt": "Run safe/read-only shell checks as separate commands. Avoid chaining with && or ; unless there is a real dependency. Never mix read-only and mutating commands in a single chain."
     }
   },
-
   "mcp": {
     "notion": {
       "type": "remote",
-      "url": "https://mcp.notion.com/mcp"
+      "url": "https://mcp.notion.com/mcp",
+      "enabled": false
     },
     "jira": {
       "type": "remote",
-      "url": "https://mcp.atlassian.com/v1/sse"
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "enabled": false
     },
     "figma": {
       "type": "remote",
-      "url": "https://mcp.figma.com/mcp"
+      "url": "https://mcp.figma.com/mcp",
+      "enabled": false
     },
     "sentry": {
       "type": "remote",
-      "url": "https://mcp.sentry.dev/mcp"
+      "url": "https://mcp.sentry.dev/mcp",
+      "enabled": false
     },
     "codesearch": {
       "type": "remote",
@@ -72,7 +84,12 @@
     },
     "gitlab-community": {
       "type": "local",
-      "command": ["npx", "-y", "@zereight/mcp-gitlab"],
+      "command": [
+        "npx",
+        "-y",
+        "@zereight/mcp-gitlab"
+      ],
+      "enabled": false,
       "environment": {
         "GITLAB_PERSONAL_ACCESS_TOKEN": "${GITLAB_PERSONAL_ACCESS_TOKEN}",
         "GITLAB_API_URL": "https://gitlab.com/api/v4/",
@@ -85,21 +102,21 @@
     "gitlab": {
       "type": "remote",
       "url": "https://gitlab-mcp-internal.inf.replicant.ai/mcp",
+      "enabled": false,
       "headers": {
         "Authorization": "Bearer ${GITLAB_PERSONAL_ACCESS_TOKEN}"
       }
     }
   },
-
   "command": {
     "code_review": {
       "description": "Run a code review on the current changes",
-      "template": "Use a sub-task to provide a brief code review on the changes. Focus on correctness and simplicity.",
+      "template": "Use a sub-task to review the current changes. Split the review surface by ownership slice first when the diff is broad, then focus on correctness and simplicity within each slice. Prefer multiple narrow review passes over one broad pass when the seams are real.",
       "subtask": true
     },
     "qa": {
       "description": "Run a full QA pass via qa-lead on the current branch's changes",
-      "template": "Run a full QA pass on the current branch's changes. Identify the changed files via git diff against the base branch, pick the relevant specialist reviewers based on what changed, dispatch them in parallel, synthesize findings, and return a structured report.",
+      "template": "Run a full QA pass on the current branch's changes. Identify the changed files via git diff against the base branch, build a slice map by ownership boundary, pick the relevant specialist reviewers per slice, dispatch narrow reviewer slices in parallel, synthesize findings, and return a structured report.",
       "agent": "qa/qa-lead",
       "subtask": true
     }

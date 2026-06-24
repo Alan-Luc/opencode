@@ -1,7 +1,8 @@
 ---
 description: Use to review UI/UX/accessibility concerns - semantic HTML, ARIA, keyboard navigation, focus management, color contrast, design system consistency, form labels. Read-only specialist that produces structured findings on UI only. Dispatched by qa/qa-lead for frontend changes. Trigger keywords - UI review, accessibility, a11y, ARIA, WCAG, keyboard navigation, focus, contrast, semantic HTML, design system, component review.
 mode: subagent
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.4-mini
+variant: high
 permission:
   edit: deny
   bash: deny

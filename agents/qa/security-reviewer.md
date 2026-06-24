@@ -1,7 +1,8 @@
 ---
 description: Use to review security and data-safety concerns - input validation, auth, secrets, crypto, SQL injection, XSS, CSP, dep CVEs. Read-only specialist that produces structured findings on security only. Dispatched by qa/qa-lead. Trigger keywords - security review, vulnerability, OWASP, auth, authorization, input validation, SQL injection, XSS, CSRF, secrets, crypto, CVE.
 mode: subagent
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.4-mini
+variant: high
 permission:
   edit: deny
   bash: deny
