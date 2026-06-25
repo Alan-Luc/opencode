@@ -25,7 +25,7 @@ Design and structure of the code, not its security/performance/correctness in is
 - **Layering violations**: data layer reaching into controllers, UI bypassing the service layer, etc.
 - **SOLID violations** where they cause actual harm — not as religion. Flag a Liskov violation only if it produces real bugs; flag SRP only when the class is genuinely a grab bag.
 - **Dependency direction**: do high-level modules depend on low-level details when they should depend on abstractions?
-- **In-house under ~200 lines without advanced features beats pulling in a new dependency.**
+- **Dependency surface**: if a change adds a new dependency, does it earn the extra maintenance and upgrade surface?
 
 ### Comment hygiene (flag, do not patch — you're read-only)
 

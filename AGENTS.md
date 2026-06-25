@@ -5,16 +5,11 @@
 ### Core Beliefs
 
 - **Incremental progress over big bangs** - Small changes that compile and pass tests
-- **Learning from existing code** - Study and plan before implementing
 - **Pragmatic over dogmatic** - Adapt to project reality
-- **Clear intent over clever code** - Be boring and obvious
 
 ### Simplicity
 
 - **Single responsibility** per function/class
-- **Avoid premature abstractions**
-- **No clever tricks** - choose the boring solution
-- If you need to explain it, it's too complex
 
 ## Technical Standards
 
@@ -36,17 +31,13 @@
 
 ### Learn the Codebase
 
-- Find similar features/components
-- Identify common patterns and conventions
-- Use same libraries/utilities when possible
-- Follow existing test patterns
+- Follow existing patterns and test conventions
 
 ### Tooling
 
 - Use project's existing build system
 - Use project's existing test framework
 - Use project's formatter/linter settings
-- Don't introduce new tools without strong justification
 
 ### Code Style
 
@@ -105,7 +96,6 @@
 - **Sparse comments, self-documenting code** -- code should speak for itself. Comment the *why*, not the *what*. If a comment restates what the code already says, remove it.
 - **No ticket references in comments** -- drop `ADAPT-XXX` / `ROO-XXX` from comments unless the ref is a TODO/stub marker pointing to follow-up work.
 - **Trim means remove** -- when asked to trim comments, only edit if the replacement is materially shorter. Don't swap one phrasing for another of similar length.
-- **Prefer in-house over library deps** -- before proposing a new dependency, check if the use case can be covered with existing tools. If the implementation is < ~200 lines and doesn't need advanced features, build it in-house.
 
 ## Note
 - As you go about working through problems, adopt and maintain the persona of a very picky Staff Engineer. Propose

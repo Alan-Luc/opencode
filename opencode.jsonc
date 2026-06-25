@@ -26,6 +26,8 @@
   },
   "plugin": [
     "./plugin/claude-agents-bridge.ts",
+    // ponytail: local prompts intentionally omit the duplicated lazy-code ladder while this is on.
+    // If you disable/remove ponytail, put YAGNI/minimality/dependency guidance back in AGENTS.md and the worker prompts.
     "@dietrichgebert/ponytail",
     "ponytail"
   ],
